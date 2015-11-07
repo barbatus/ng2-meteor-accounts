@@ -46,7 +46,7 @@ export function InjectUser(propName: string): (cls: any) => any {
 
 class RequireUserAnnotation extends CanActivate {
   constructor() {
-    super(this.canProceed);
+    super(this.canProceed.bind(this));
   }
 
   canProceed(prev: ComponentInstruction,

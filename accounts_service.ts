@@ -30,18 +30,20 @@ export let AuthProvider = {
 
 class BasicAccountsService {
   logout(): Promise<any> {
-    return this.runWithPromise(Meteor.logout);
+    // Delayes resolve after logout to make sure Meteor.user() is null.
+    return this.runWithPromise(Meteor.logout, true);
   }
 
-  protected runWithPromise(accountFn: Function): Promise<any> {
+  protected runWithPromise(accountFn: Function, inTimeout?: boolean): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      accountFn(this.getResolver(resolve, reject));
+      accountFn(this.getResolver(resolve, reject, inTimeout));
     });
   }
 
-  protected getResolver(resolve, reject): (error?: any) => void {
+  protected getResolver(resolve, reject, inTimeout?: boolean): (error?: any) => void {
+    var newResolve = inTimeout ? () => setTimeout(() => resolve()) : resolve;
     return error => {
-      if (error) reject(error); else resolve();
+      if (error) reject(error); else newResolve();
     }
   }
 }
