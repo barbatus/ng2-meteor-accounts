@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.1');
 
   api.use([
-    'accounts-base@1.2.2',
+    'accounts-base@1.2.1',
     'promise@0.4.8',
     'barbatus:angular2@0.6.6'
   ]);
@@ -31,6 +31,6 @@ Package.onTest(function(api) {
   api.use([
     'tinytest',
     'sanjo:jasmine@0.18.0',
-    'barbatus:ng2-accounts-base'
+    'barbatus:ng2-meteor-accounts'
   ]);
 });
