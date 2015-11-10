@@ -1,2 +1,2 @@
-# Basic Meteor Accounts API for Angular 2.
+# Meteor Accounts API for Angular 2.
 Docs are comming...
