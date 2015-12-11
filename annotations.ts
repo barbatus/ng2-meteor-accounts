@@ -3,13 +3,11 @@
 
 'use strict';
 
-import {TypeDecorator} from 'angular2/angular2';
+import {TypeDecorator} from 'angular2/core';
 
 import {makeDecorator} from 'angular2/decorators';
 
-import {ComponentInstruction} from 'angular2/router';
-
-import {CanActivate} from 'angular2/router_dev';
+import {CanActivate, ComponentInstruction} from 'angular2/router';
 
 class InjectUserAnnotation {
   constructor(public propName: string = 'user') {}
@@ -44,15 +42,11 @@ export function InjectUser(propName: string): (cls: any) => any {
   return TypeDecorator;
 };
 
-class RequireUserAnnotation extends CanActivate {
-  constructor() {
-    super(this.canProceed.bind(this));
-  }
-
+class RequireUserAnnotation {
   canProceed(prev: ComponentInstruction,
              next: ComponentInstruction) {
     return !!Meteor.user();
   }
 }
 
-export var RequireUser = makeDecorator(RequireUserAnnotation);
+export const RequireUser = makeDecorator(RequireUserAnnotation);
