@@ -78,12 +78,15 @@ Original doc can be found [here](http://docs.meteor.com/#/full/meteor_loginwithe
 `@InjectUser(propName: string)`
 
 Injects Meteor's user as a property to a Angular 2 component or directive.
+New property can be used in the component's template as well.
 
-By default,property called `user`.
+By default, property called `user`.
 
 > Note that new property will be reactive only if you add `urigo:angular2-meteor` package.
 
 If you want to change property name, pass in a particular name in the annotation.
+
+Internally implementation bases on wrapping of `Meteor.user()`.
 
 `@RequireUser()`
 
@@ -92,7 +95,9 @@ Only logged-in users (via any ways described above) will be able to load it.
 
 ## Examples
 
-Imports one of the services and pass it in a component as follows:
+#### Services Usage
+
+Imports one of the services and use it in a component as follows:
 
 ```ts
 
@@ -112,6 +117,30 @@ class FooAccounts {
 
   onLoginBtnClick(email, pwd) {
     this.accounts.login(email, pwd).then(() => alert('logged in'));
+  }
+}
+
+```
+
+#### Annotations Usage
+
+```ts
+
+import {InjectUser} from 'meteor-accounts';
+
+@Component({
+  selector: 'foo'
+})
+@View({
+  template: '...'
+})
+@InjectUser('currentUser')
+class FooAccounts {
+  constructor() {
+    // Logs out a value of Meteor.user(),
+    // property is reactive if urigo:angular2-meteor added,
+    // can be used in templates as well.
+    console.log(this.currentUser);
   }
 }
 
