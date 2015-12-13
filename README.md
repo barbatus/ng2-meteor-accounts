@@ -90,3 +90,29 @@ If you want to change property name, pass in a particular name in the annotation
 If placed above a component, will prohibit anonymous access to that component.
 Only logged-in users (via any ways described above) will be able to load it.
 
+## Examples
+
+Imports one of the services and pass it in a component as follows:
+
+```ts
+
+...
+
+import {AccountsService} from 'meteor-accounts';
+
+@Component({
+  selector: 'foo',
+  viewProviders: [AccountsService]
+})
+@View({
+  template: '...'
+})
+class FooAccounts {
+  constructor(private accounts: AccountsService) {}
+
+  onLoginBtnClick(email, pwd) {
+    this.accounts.login(email, pwd).then(() => alert('logged in'));
+  }
+}
+
+```
