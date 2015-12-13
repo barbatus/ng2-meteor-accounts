@@ -2,7 +2,7 @@
 
 Accounts services to be used in custom Angular 2 components.
 
-Wraps over API of different Meteor accounts packages, including 'accounts-base', 'accounts-password', 'accounts-facebook' etc.
+Wraps over API of different Meteor accounts packages, including "accounts-base", "accounts-password", "accounts-facebook" etc.
 
 Additionally, implements some login specific annotations for a convenience of API users.
 
@@ -10,7 +10,7 @@ Additionally, implements some login specific annotations for a convenience of AP
 
 ### AccountsService
 
-Exposes and combines API of the 'accounts-base' and 'accounts-password' packages.
+Exposes and combines API of the "accounts-base" and "accounts-password" packages.
 
 Makes API more compatible with the Angular 2 code style, e.g., by making methods return promises.
 
@@ -24,12 +24,13 @@ Registers a new account. `AccountDetails` has a format as follows:
 
 ```ts
 {
-  name: string;
+  username: string;
+  email: string;
   password: string;
   profile?: Object;
 }
 ```
-For more info, please read here.
+For more info, please read [here](http://docs.meteor.com/#/full/accounts_createuser).
 
 **`forgotPassword(email: string):Promise<any>`**
 
@@ -61,9 +62,9 @@ meteor add accounts-facebook
 ```
 if you want to allow logining with Facebook.
 
-Original doc can be found here.
+Original doc can be found [here](http://docs.meteor.com/#/full/meteor_loginwithexternalservice).
 
-`loginOptions` is used to provide the following info:
+`loginOptions` is used to provide with the following info:
 
 ```ts
 {
@@ -78,7 +79,9 @@ Original doc can be found here.
 
 Injects Meteor's user as a property to a Angular 2 component or directive.
 
-By default, property called `user` and, if you added `urigo:angular2-meteor`, is reactive.
+By default,property called `user`.
+
+> Note that new property will be reactive only if you add `urigo:angular2-meteor` package.
 
 If you want to change property name, pass in a particular name in the annotation.
 
