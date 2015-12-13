@@ -14,11 +14,11 @@ Exposes and combines API of the "accounts-base" and "accounts-password" packages
 
 Makes API more compatible with the Angular 2 code style, e.g., by making methods return promises.
 
-**`login(usernameOrEmail: string, password): Promise<any>`**
+**`login(usernameOrEmail: string, password: string): Promise<any>`**
 
 Simple username/password login.
 
-**`register(newUser: AccountDetails):Promise<any>`**
+**`register(newUser: AccountDetails): Promise<any>`**
 
 Registers a new account. `AccountDetails` has a format as follows:
 
@@ -42,7 +42,7 @@ Sets a new password with the token provided `forgotPassword`.
 
 **`changePassword(oldPassword: string, newPassword: string): Promise<any>`**
 
-Simply change password, given the current password and a new one.
+Simply change current password, given the current password and a new one.
 
 **`verifyEmail(token: string): Promise<any>`**
 
