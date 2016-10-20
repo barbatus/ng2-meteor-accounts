@@ -25,7 +25,8 @@ export let AuthProvider = {
   GITHUB: 'github',
   MEETUP: 'meetup',
   WEIBO: 'weibo',
-  METEOR: 'meteor'
+  METEOR: 'meteor',
+  VK: 'vk'
 };
 
 class BasicAccountsService {
@@ -115,6 +116,12 @@ export class AccountsSocialService extends BasicAccountsService {
           throw new Error(errorMsg);
         }
         accountFn = Meteor.loginWithFacebook.bind(null, options);
+        break;
+      case AuthProvider.VK:
+        if (!Meteor.loginWithVk) {
+          throw new Error(errorMsg);
+        }
+        accountFn = Meteor.loginWithVk.bind(null, options);
         break;
       case AuthProvider.GOOGLE:
         if (!Meteor.loginWithGoogle) {
